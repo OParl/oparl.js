@@ -1,0 +1,18 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>OParl test</title>
+	<script src="lib/oparl-src.js"></script>
+</head>
+<body>
+
+	<script>
+		document.onreadystatechange = function () {
+			if (document.readyState == "complete") {
+				OParl.open('http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp');
+			}
+		}
+	</script>
+
+</body>
+</html>
