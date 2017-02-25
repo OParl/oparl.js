@@ -8,6 +8,19 @@ Some links
 
 ##getting started
 
+###HTML file
+
+include JavaScript lib file in HTML header
+
+```<script src="lib/oparl-src.js"></script>```
+
+than use the global ```OParl``` object
+
+    OParl.open(url);
+
+###NodeJS
+
+	var OParl = require('./lib/oparl-src');
     OParl.open(url);
 
 ##objects
