@@ -8,31 +8,51 @@ Some links
 
 ##getting started
 
+You can use **oparl.js** directly in your HTML/JavaScript file or in your node.js JavaScript file.
+
 ###HTML file
 
-include JavaScript lib file in HTML header
+First include the JavaScript lib file in HTML header:
 
 ```<script src="lib/oparl-src.js"></script>```
 
-than use the global ```OParl``` object
+Second use the global ```OParl``` object:
 
     OParl.open(url);
 
 ###NodeJS
 
+First require the lib:
+
 	var OParl = require('./lib/oparl-src');
+
+Second use the ```oParl``` object:
+
     OParl.open(url);
+
+###Load first data from the OParl endpoint
+
+Use the function ```OParl.open``` with 2 parameters. The first parameter contains the OParl endpoint URI of the requested domain.
+The second parameter is a callback function called asynchroniously. The callback function with 2 parameters return an error message if the first parameter is non-null.
+The second contains an ```oparl:System``` object, if the call was successful.
+
+	OParl.open(uriToOParlServer, function (err, data) {
+		if (err !== null) {
+			console.error('Something went wrong: ' + err);
+		} else {
+			console.log(data);
+		}
+	});
 
 ##objects
 
 ready to use object types:
 
-    none
+    oparl:Body
+    oparl:System
 
 not yet ready object types:
 
-    oparl:System
-    oparl:Body
     oparl:LegislativeTerm
     oparl:Organization
     oparl:Person
