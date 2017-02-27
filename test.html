@@ -7,9 +7,38 @@
 <body>
 
 	<script>
+
+function log(text) {
+	console.log(text);
+
+	var div = document.createElement('div');
+	div.style.cssText = 'color:#555;padding:.2em .5em;';
+	div.innerHTML = text;
+	document.body.appendChild(div);
+}
+
+function error(text) {
+	console.log(text);
+
+	var div = document.createElement('div');
+	div.style.cssText = 'color:#f55;padding:.2em .5em;';
+	div.innerHTML = text;
+	document.body.appendChild(div);
+}
+
+function start() {
+	OParl.open('http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log(data);
+		}
+	});
+}
+
 		document.onreadystatechange = function () {
 			if (document.readyState == "complete") {
-				OParl.open('http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp');
+				start();
 			}
 		}
 	</script>
