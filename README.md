@@ -5,6 +5,7 @@ This is a JavaScript lib for the OParl protocoll. The lib is in the beginning. P
 Some links
 - the spec: https://oparl.org/spezifikation/online-ansicht/
 - a (real) test system: http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp
+- see the oparl.js lib in action: https://tursics.github.io/oparl.js/
 
 ##getting started
 
@@ -14,21 +15,29 @@ You can use **oparl.js** directly in your HTML/JavaScript file or in your node.j
 
 First include the JavaScript lib file in HTML header:
 
-```<script src="lib/oparl-src.js"></script>```
+```javascript
+<script src="lib/oparl-src.js"></script>
+```
 
 Second use the global ```OParl``` object:
 
-    OParl.open(url);
+```javascript
+OParl.open(url);
+```
 
 ###NodeJS
 
 First require the lib:
 
-	var OParl = require('./lib/oparl-src');
+```javascript
+var OParl = require('./lib/oparl-src');
+```
 
 Second use the ```oParl``` object:
 
-    OParl.open(url);
+```javascript
+OParl.open(url);
+```
 
 ###Load first data from the OParl endpoint
 
