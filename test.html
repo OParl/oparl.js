@@ -28,6 +28,15 @@ function error(text) {
 
 //-----------------------------------------------------------------------
 
+function testLegislative(data) {
+	'use strict';
+
+	log();
+	log('Legislative term name: ' + data.name);
+}
+
+//-----------------------------------------------------------------------
+
 function testBody(data) {
 	log();
 	log('Body name: ' + data.name);
@@ -69,6 +78,15 @@ function testBody(data) {
 													error('Something went wrong: ' + err);
 												} else {
 													log('Legislative count: ' + dataLegislativeTermList.length);
+													if (dataLegislativeTermList.length > 0) {
+														dataLegislativeTermList[0].get(function (err, object) {
+															if (err !== null) {
+																error('Something went wrong: ' + err);
+															} else {
+																testLegislative(object);
+															}
+														});
+													}
 												}
 											});
 										}
@@ -111,7 +129,8 @@ function testSystem(data) {
 //-----------------------------------------------------------------------
 
 function start() {
-	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+//	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+	OParl.open('https://dev.oparl.org/api/v1/system/', function (err, data) {
 		if (err !== null) {
 			error('Something went wrong: ' + err);
 		} else {

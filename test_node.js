@@ -3,6 +3,16 @@
 
 //-----------------------------------------------------------------------
 
+function testLegislative(data) {
+	'use strict';
+
+	console.log();
+	console.log('Legislative term name: ' + data.name);
+	console.log(data);
+}
+
+//-----------------------------------------------------------------------
+
 function testBody(data) {
 	'use strict';
 
@@ -46,6 +56,15 @@ function testBody(data) {
 													console.error('Something went wrong: ' + err);
 												} else {
 													console.log('Legislative count: ' + dataLegislativeTermList.length);
+													if (dataLegislativeTermList.length > 0) {
+														dataLegislativeTermList[0].get(function (err, object) {
+															if (err !== null) {
+																console.error('Something went wrong: ' + err);
+															} else {
+																testLegislative(object);
+															}
+														});
+													}
 												}
 											});
 										}
