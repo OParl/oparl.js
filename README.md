@@ -5,7 +5,7 @@ This is a JavaScript lib for the OParl protocoll. The lib is in the beginning. P
 Some links
 - the spec: https://oparl.org/spezifikation/online-ansicht/
 - a (real) test system: http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp
-- see the oparl.js lib in action: https://tursics.github.io/oparl.js/
+- see the oparl.js lib in action: https://tursics.github.io/oparl.js/test.html
 
 ##getting started
 

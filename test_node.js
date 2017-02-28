@@ -93,7 +93,7 @@ function start() {
 	'use strict';
 
 	var OParl = require('./lib/oparl-src');
-	OParl.open('http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
 		if (err !== null) {
 			console.error('Something went wrong: ' + err);
 		} else {
