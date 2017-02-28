@@ -8,33 +8,119 @@
 
 	<script>
 
-function log(text) {
-	console.log(text);
+//-----------------------------------------------------------------------
 
+function log(text) {
 	var div = document.createElement('div');
-	div.style.cssText = 'color:#555;padding:.2em .5em;';
-	div.innerHTML = text;
+	div.style.cssText = 'color:#555;padding:0 .5em;';
+	div.innerHTML = text || '<br>';
 	document.body.appendChild(div);
 }
 
-function error(text) {
-	console.log(text);
+//-----------------------------------------------------------------------
 
+function error(text) {
 	var div = document.createElement('div');
 	div.style.cssText = 'color:#f55;padding:.2em .5em;';
 	div.innerHTML = text;
 	document.body.appendChild(div);
 }
 
+//-----------------------------------------------------------------------
+
+function testBody(data) {
+	log();
+	log('Body name: ' + data.name);
+	log('Body license: ' + data.license);
+	log('Body modified: ' + data.modified.toJSON().substr(0, 10));
+
+	data.systemObject.get(function (err, dataSystem) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log('System name: ' + dataSystem.name);
+
+			data.organizationList.get(function (err, dataOrganizationList) {
+				if (err !== null) {
+					error('Something went wrong: ' + err);
+				} else {
+					log('Organization count: ' + dataOrganizationList.length);
+
+					data.personList.get(function (err, dataPersonList) {
+						if (err !== null) {
+							error('Something went wrong: ' + err);
+						} else {
+							log('Person count: ' + dataPersonList.length);
+
+							data.meetingList.get(function (err, dataMeetingList) {
+								if (err !== null) {
+									error('Something went wrong: ' + err);
+								} else {
+									log('Meeting count: ' + dataMeetingList.length);
+
+									data.paperList.get(function (err, dataPaperList) {
+										if (err !== null) {
+											error('Something went wrong: ' + err);
+										} else {
+											log('Paper count: ' + dataPaperList.length);
+
+											data.legislativeTermList.get(function (err, dataLegislativeTermList) {
+												if (err !== null) {
+													error('Something went wrong: ' + err);
+												} else {
+													log('Legislative count: ' + dataLegislativeTermList.length);
+												}
+											});
+										}
+									});
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
+function testSystem(data) {
+	log();
+	log('System name: ' + data.name);
+	log('System license: ' + data.license);
+
+	data.bodyList.get(function (err, dataBodyList) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log('Body count: ' + dataBodyList.length);
+			if (dataBodyList.length > 0) {
+				dataBodyList[0].get(function (err, object) {
+					if (err !== null) {
+						error('Something went wrong: ' + err);
+					} else {
+						testBody(object);
+					}
+				});
+			}
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
 function start() {
 	OParl.open('http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
 		if (err !== null) {
 			error('Something went wrong: ' + err);
 		} else {
-			log(data);
+			testSystem(data);
 		}
 	});
 }
+
+//-----------------------------------------------------------------------
 
 		document.onreadystatechange = function () {
 			if (document.readyState == "complete") {
