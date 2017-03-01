@@ -72,7 +72,7 @@ The ```OParl.open``` function serves an [oparl:System](#oparlSystem) object to t
 
 **To do:** the list object should handle the paging and pagination. Currently a maximum of 100 objects will be listed.
 
-####oparl:Body
+####<a name="oparlBody"></a>oparl:Body
 
 The ```oparl:Body``` object represent one city, country or municipal.
 
@@ -80,11 +80,11 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |--------------------------------|------------|-----------------------------------------------
 |objectType                      |string      |is 'oparl:Body'
 |name                            |string      |the official (and long) name of the body
-|organizationList                |list object |list of all organizations, see object ```oparl:Organization```
+|organizationList                |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
 |personList                      |list object |list of all persons, see object ```oparl:Person```
 |meetingList                     |list object |list of all meetings, see object ```oparl:Meeting```
 |paperList                       |list object |list of all papers, see object ```oparl:Paper```
-|legislativeTermList             |list object |list of all legislative terms, see object ```oparl:LegislativeTerm```
+|legislativeTermList             |list object |list of all legislative terms, see object [oparl:LegislativeTerm](#oparlLegislativeTerm)
 |systemObject       *(optional)* |item object |the parent OParl system, see object [oparl:System](#oparlSystem)
 |shortName          *(optional)* |string      |a shorter version of the body name
 |website            *(optional)* |string      |URI to the ordinary website of the body
@@ -101,39 +101,39 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |                                |            |*^^ type should be changed ^^*
 |modified           *(optional)* |Date        |last modified
 
-####oparl:LegislativeTerm
+####<a name="oparlLegislativeTerm"></a>oparl:LegislativeTerm
 
 The ```oparl:LegislativeTerm``` object represent one legislative period.
 
 |Parameter                       |Type        |Description
 |--------------------------------|------------|-----------------------------------------------
 |objectType                      |string      |is 'oparl:LegislativeTerm'
-|bodyObject         *(optional)* |item object |the body of the legislation period, see object ```oparl:Body```
+|bodyObject         *(optional)* |item object |the body of the legislation period, see object [oparl:Body](#oparlBody)
 |name               *(optional)* |string      |user friendly title of the legislative period
 |startDate          *(optional)* |Date        |first day of the legislative period
 |endDate            *(optional)* |Date        |last day of the legislative period
 
-####oparl:Organization
+####<a name="oparlOrganization"></a>oparl:Organization
 
 The ```oparl:Organization``` object represent one organization unit.
 
 |Parameter                       |Type        |Description
 |--------------------------------|------------|-----------------------------------------------
 |objectType                      |string      |is 'oparl:Organization'
-|bodyObject         *(optional)* |item object |the body of the organization, see object ```oparl:Body```
+|bodyObject         *(optional)* |item object |the body of the organization, see object [oparl:Body](#oparlBody)
 |name               *(optional)* |string      |the official (and long) name of the organization
 |membershipList     *(optional)* |list object |list of all memberships, see object ```oparl:Membership```
 |meetingList        *(optional)* |list object |list of all meetings, see object ```oparl:Meeting```
 |shortName          *(optional)* |string      |a shorter version of the organization name
 |post               *(optional)* |array       |array of strings
-|subOrganizationOfObject *(optional)* |item object |a superior organization, see object ```oparl:Organization```
+|subOrganizationOfObject *(optional)* |item object |a superior organization, see object [oparl:Organization](#oparlOrganization)
 |organizationType   *(optional)* |string      |type of the organization
 |classification     *(optional)* |string      |group of the organization
 |startDate          *(optional)* |Date        |date of formation
 |endDate            *(optional)* |Date        |date of termination
 |website            *(optional)* |string      |URI of the organization website
 |locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
-|externalBodyObject *(optional)* |item object |the body of an external OParl system, see object ```oparl:Body```
+|externalBodyObject *(optional)* |item object |the body of an external OParl system, see object [oparl:Body](#oparlBody)
 
 ####<a name="oparlSystem"></a>oparl:System
 
@@ -143,7 +143,7 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
 |--------------------------------|------------|-----------------------------------------------
 |objectType                      |string      |is 'oparl:System'
 |oparlVersion                    |string      |version number of supported OParl
-|bodyList                        |list object |list of all bodies, see object ```oparl:Body```
+|bodyList                        |list object |list of all bodies, see object [oparl:Body](#oparlBody)
 |otherOparlVersions *(optional)* |array       |array of URIs
 |                                |            |*^^ type should be changed ^^*
 |license            *(optional)* |string      |URI of the used license
@@ -164,7 +164,6 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
     oparl:Consultation
     oparl:File
     oparl:Location
-    oparl:LegislativeTerm
     oparl:Membership
     oparl:AgendaItem
     oparl:Consultation
