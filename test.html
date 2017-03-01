@@ -28,11 +28,56 @@ function error(text) {
 
 //-----------------------------------------------------------------------
 
-function testLegislative(data) {
+function testOrganization(data) {
+	'use strict';
+
+	log();
+	log('Organization name: ' + data.name);
+	log('Organization type: ' + data.organizationType);
+	log('Classification: ' + data.classification);
+	log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
+	log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+
+	data.membershipList.get(function (err, dataMembership) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log('Membership count: ' + dataMembership.length);
+
+			data.meetingList.get(function (err, dataMeeting) {
+				if (err !== null) {
+					error('Something went wrong: ' + err);
+				} else {
+					log('Meeting count: ' + dataMeeting.length);
+				}
+			});
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
+function testLegislative(data, callback) {
 	'use strict';
 
 	log();
 	log('Legislative term name: ' + data.name);
+
+	data.bodyObject.get(function (err, dataBody) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			if (dataBody === null) {
+				log('Body name: ---');
+			} else {
+				log('Body name: ' + dataBody.name);
+			}
+			log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
+			log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+
+			callback();
+		}
+	});
 }
 
 //-----------------------------------------------------------------------
@@ -79,11 +124,21 @@ function testBody(data) {
 												} else {
 													log('Legislative count: ' + dataLegislativeTermList.length);
 													if (dataLegislativeTermList.length > 0) {
-														dataLegislativeTermList[0].get(function (err, object) {
+														dataLegislativeTermList[0].get(function (err, dataLegislativeTerm) {
 															if (err !== null) {
 																error('Something went wrong: ' + err);
 															} else {
-																testLegislative(object);
+																testLegislative(dataLegislativeTerm, function () {
+																	if (dataOrganizationList.length > 0) {
+																		dataOrganizationList[0].get(function (err, dataOrganization) {
+																			if (err !== null) {
+																				error('Something went wrong: ' + err);
+																			} else {
+																				testOrganization(dataOrganization);
+																			}
+																		});
+																	}
+																});
 															}
 														});
 													}
@@ -129,8 +184,8 @@ function testSystem(data) {
 //-----------------------------------------------------------------------
 
 function start() {
-//	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
-	OParl.open('https://dev.oparl.org/api/v1/system/', function (err, data) {
+	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+//	OParl.open('https://dev.oparl.org/api/v1/system/', function (err, data) {
 		if (err !== null) {
 			error('Something went wrong: ' + err);
 		} else {

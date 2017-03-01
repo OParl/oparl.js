@@ -33,7 +33,7 @@ First require the lib:
 var OParl = require('./lib/oparl-src');
 ```
 
-Second use the ```oParl``` object:
+Second use the ```OParl``` object:
 
 ```javascript
 OParl.open(url);
@@ -43,7 +43,7 @@ OParl.open(url);
 
 Use the function ```OParl.open``` with 2 parameters. The first parameter contains the OParl endpoint URI of the requested domain.
 The second parameter is a callback function called asynchroniously. The callback function with 2 parameters return an error message if the first parameter is non-null.
-The second contains an ```oparl:System``` object, if the call was successful.
+The second contains an [oparl:System](#oparlSystem) object, if the call was successful.
 
 ```javascript
 OParl.open(uriToOParlServer, function (err, serverObj) {
@@ -56,7 +56,7 @@ OParl.open(uriToOParlServer, function (err, serverObj) {
 ```
 ##Object types
 
-The ```OParl.open``` function serves an **```oparl:System```** object to the callback function. First you should read the description of these type.
+The ```OParl.open``` function serves an [oparl:System](#oparlSystem) object to the callback function. First you should read the description of these type.
 
 ####item object
 
@@ -85,23 +85,57 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |meetingList                     |list object |list of all meetings, see object ```oparl:Meeting```
 |paperList                       |list object |list of all papers, see object ```oparl:Paper```
 |legislativeTermList             |list object |list of all legislative terms, see object ```oparl:LegislativeTerm```
-|systemObject       *(optional)* |item object |the parent OParl system, see object ```oparl:System```
-|shortName          *(optional)* |strings     |a shorter version of the body name
-|website            *(optional)* |strings     |URI to the ordinary website of the body
-|license            *(optional)* |strings     |URI of the used license
+|systemObject       *(optional)* |item object |the parent OParl system, see object [oparl:System](#oparlSystem)
+|shortName          *(optional)* |string      |a shorter version of the body name
+|website            *(optional)* |string      |URI to the ordinary website of the body
+|license            *(optional)* |string      |URI of the used license
 |licenseValidSince  *(optional)* |Date        |last license changed date
 |oparlSince         *(optional)* |Date        |date for the first use of OParl
-|ags                *(optional)* |strings     |8 digits of the AGS (the German Amtliche Gemeindeschlüssel)
-|rgs                *(optional)* |strings     |12 digits of the RGS (the German Regionalschlüssel)
+|ags                *(optional)* |string      |8 digits of the AGS (the German Amtliche Gemeindeschlüssel)
+|rgs                *(optional)* |string      |12 digits of the RGS (the German Regionalschlüssel)
 |equivalent         *(optional)* |array       |external links for the body
-|contactEmail       *(optional)* |strings     |contact mail address
-|contactName        *(optional)* |strings     |name of the contact person
-|classification     *(optional)* |strings     |classification of the body
-|location           *(optional)* |strings     |location of the body
+|contactEmail       *(optional)* |string      |contact mail address
+|contactName        *(optional)* |string      |name of the contact person
+|classification     *(optional)* |string      |classification of the body
+|location           *(optional)* |string      |location of the body
 |                                |            |*^^ type should be changed ^^*
 |modified           *(optional)* |Date        |last modified
 
-####oparl:System
+####oparl:LegislativeTerm
+
+The ```oparl:LegislativeTerm``` object represent one legislative period.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:LegislativeTerm'
+|bodyObject         *(optional)* |item object |the body of the legislation period, see object ```oparl:Body```
+|name               *(optional)* |string      |user friendly title of the legislative period
+|startDate          *(optional)* |Date        |first day of the legislative period
+|endDate            *(optional)* |Date        |last day of the legislative period
+
+####oparl:Organization
+
+The ```oparl:Organization``` object represent one organization unit.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:Organization'
+|bodyObject         *(optional)* |item object |the body of the organization, see object ```oparl:Body```
+|name               *(optional)* |string      |the official (and long) name of the organization
+|membershipList     *(optional)* |list object |list of all memberships, see object ```oparl:Membership```
+|meetingList        *(optional)* |list object |list of all meetings, see object ```oparl:Meeting```
+|shortName          *(optional)* |string      |a shorter version of the organization name
+|post               *(optional)* |array       |array of strings
+|subOrganizationOfObject *(optional)* |item object |a superior organization, see object ```oparl:Organization```
+|organizationType   *(optional)* |string      |type of the organization
+|classification     *(optional)* |string      |group of the organization
+|startDate          *(optional)* |Date        |date of formation
+|endDate            *(optional)* |Date        |date of termination
+|website            *(optional)* |string      |URI of the organization website
+|locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
+|externalBodyObject *(optional)* |item object |the body of an external OParl system, see object ```oparl:Body```
+
+####<a name="oparlSystem"></a>oparl:System
 
 The ```oparl:System``` object is the entry point for all clients. It defines basic information of the OParl system.
 
@@ -122,8 +156,6 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
 
 ####not yet ready object types
 
-    oparl:LegislativeTerm
-    oparl:Organization
     oparl:Person
     oparl:Membership
     oparl:Meeting
