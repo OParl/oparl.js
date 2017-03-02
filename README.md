@@ -1,4 +1,4 @@
-#oparl.js
+# oparl.js
 
 This is a JavaScript library for the OParl protocoll.
 
@@ -8,11 +8,11 @@ Some links: the [OParl spec](https://oparl.org/spezifikation/online-ansicht/),
 a (real) [test system](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp),
 and a [live demo](https://tursics.github.io/oparl.js/test.html) of the oparl.js
 
-##Getting started
+## Getting started
 
 You can use **oparl.js** directly in your HTML/JavaScript file or in your node.js project.
 
-###HTML file
+### HTML file
 
 1. Include the JavaScript lib file in HTML header
 ```javascript
@@ -23,7 +23,7 @@ You can use **oparl.js** directly in your HTML/JavaScript file or in your node.j
 OParl.open(url);
 ```
 
-###Node.js
+### Node.js
 
 1. Installation
 ```
@@ -35,7 +35,7 @@ var OParl = require('oparl');
 OParl.open(url);
 ```
 
-###Load first data from the OParl endpoint
+### Load first data from the OParl endpoint
 
 Use the function ```OParl.open``` with 2 parameters. The first parameter contains the OParl endpoint URI of the requested domain.
 The second parameter is a callback function called asynchroniously. The callback function with 2 parameters return an error message if the first parameter is non-null.
@@ -50,17 +50,17 @@ OParl.open(uriToOParlServer, function (err, serverObj) {
 	}
 });
 ```
-##Object types
+## Object types
 
 The ```OParl.open``` function serves an [oparl:System](#oparlSystem) object to the callback function. First you should read the description of these type.
 
-####item object
+#### Item object
 
 |Function      |Description
 |--------------|------------
 |get(callback) |The ```get``` function collect one object. This could be done by an internet request call. So the function did not return the object, it calls the ```callback``` function when it's done.<br>**```callback(error, object)```**<br>The ```error``` parameter contains an error message or, if it is ```null```, the ```object``` parameter contains an **object** in one of the oparl: types (listed below).
 
-####list object
+#### List object
 
 |Function      |Description
 |--------------|------------
@@ -68,7 +68,7 @@ The ```OParl.open``` function serves an [oparl:System](#oparlSystem) object to t
 
 **To do:** the list object should handle the paging and pagination. Currently a maximum of 100 objects will be listed.
 
-####<a name="oparlBody"></a>oparl:Body
+#### <a name="oparlBody"></a>oparl:Body
 
 The ```oparl:Body``` object represent one city, country or municipal.
 
@@ -97,7 +97,7 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |                                |            |*^^ type should be changed ^^*
 |modified           *(optional)* |Date        |last modified
 
-####<a name="oparlLegislativeTerm"></a>oparl:LegislativeTerm
+#### <a name="oparlLegislativeTerm"></a>oparl:LegislativeTerm
 
 The ```oparl:LegislativeTerm``` object represent one legislative period.
 
@@ -109,7 +109,7 @@ The ```oparl:LegislativeTerm``` object represent one legislative period.
 |startDate          *(optional)* |Date        |first day of the legislative period
 |endDate            *(optional)* |Date        |last day of the legislative period
 
-####<a name="oparlOrganization"></a>oparl:Organization
+#### <a name="oparlOrganization"></a>oparl:Organization
 
 The ```oparl:Organization``` object represent one organization unit.
 
@@ -131,7 +131,7 @@ The ```oparl:Organization``` object represent one organization unit.
 |locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
 |externalBodyObject *(optional)* |item object |the body of an external OParl system, see object [oparl:Body](#oparlBody)
 
-####<a name="oparlSystem"></a>oparl:System
+#### <a name="oparlSystem"></a>oparl:System
 
 The ```oparl:System``` object is the entry point for all clients. It defines basic information of the OParl system.
 
@@ -150,7 +150,7 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
 |vendor             *(optional)* |string      |URI of the vendor of the RIS software
 |product            *(optional)* |string      |URI of the software product
 
-####not yet ready object types
+#### Not yet ready object types
 
     oparl:Person
     oparl:Membership
@@ -166,13 +166,13 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
     oparl:File
     oparl:Location
 
-##Contributing
+## Contributing
 
-##Release History
+## Release History
 
 * 0.0.1 Initial release
 
-##License
+## License
 
 This is free and unencumbered software released into the public domain.
 
