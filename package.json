@@ -1,0 +1,9 @@
+{
+  "name": "oparl-js",
+  "description": "A JavaScript OParl Client",
+  "main": "lib/oparl-src.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OParl/oparl.js.git"
+  }
+}
