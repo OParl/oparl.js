@@ -1,41 +1,37 @@
 #oparl.js
 
-This is a JavaScript lib for the OParl protocoll. The lib is in the beginning. Pre-Alpha...
+This is a JavaScript library for the OParl protocoll.
 
-Some links
-- the spec: https://oparl.org/spezifikation/online-ansicht/
-- a (real) test system: http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp
-- see the oparl.js lib in action: https://tursics.github.io/oparl.js/test.html
+THE LIB IS IN THE BEGINING. PRE-ALPHA...
 
-##getting started
+Some links: the [OParl spec](https://oparl.org/spezifikation/online-ansicht/),
+a (real) [test system](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp),
+and a [live demo](https://tursics.github.io/oparl.js/test.html) of the oparl.js
 
-You can use **oparl.js** directly in your HTML/JavaScript file or in your node.js JavaScript file.
+##Getting started
+
+You can use **oparl.js** directly in your HTML/JavaScript file or in your node.js project.
 
 ###HTML file
 
-First include the JavaScript lib file in HTML header:
-
+1. Include the JavaScript lib file in HTML header
 ```javascript
 <script src="lib/oparl-src.js"></script>
 ```
-
-Second use the global ```OParl``` object:
-
+2. Use the global ```OParl``` object
 ```javascript
 OParl.open(url);
 ```
 
-###NodeJS
+###Node.js
 
-First require the lib:
-
-```javascript
-var OParl = require('./lib/oparl-src');
+1. Installation
 ```
-
-Second use the ```OParl``` object:
-
+npm install oparl --save
+```
+2. Usage
 ```javascript
+var OParl = require('oparl');
 OParl.open(url);
 ```
 
@@ -170,6 +166,17 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
     oparl:File
     oparl:Location
 
-##Lizenz
+##Contributing
 
-Die JavaScript-Lib ist kostenlos und in die Public Domain freigegeben. Weitere Informationen findest du in der Datei LICENSE.md
+##Release History
+
+* 0.0.1 Initial release
+
+##License
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
