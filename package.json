@@ -1,0 +1,22 @@
+{
+  "name": "oparl",
+  "version": "0.0.1",
+  "description": "A JavaScript OParl Client",
+  "main": "lib/oparl-src.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:OParl/oparl.js.git"
+  },
+  "keywords": [
+    "oparl"
+  ],
+  "author": "Thomas Tursics <thomas@tursics.de> (http://tursics.de)",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/OParl/oparl.js/issues"
+  },
+  "homepage": "https://github.com/OParl/oparl.js#readme"
+}
