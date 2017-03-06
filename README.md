@@ -6,7 +6,7 @@ THE LIB IS IN THE BEGINING. PRE-ALPHA...
 
 Some links: the [OParl spec](https://oparl.org/spezifikation/online-ansicht/),
 a (real) [test system](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp),
-and a [live demo](https://tursics.github.io/oparl.js/test.html) of the oparl.js
+and a [live demo](https://oparl.github.io/oparl.js/test.html) of the oparl.js
 
 ## Getting started
 
@@ -78,7 +78,7 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |name                            |string      |the official (and long) name of the body
 |organizationList                |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
 |personList                      |list object |list of all persons, see object ```oparl:Person```
-|meetingList                     |list object |list of all meetings, see object ```oparl:Meeting```
+|meetingList                     |list object |list of all meetings, see object [oparl:Meeting](#oparlMeeting)
 |paperList                       |list object |list of all papers, see object ```oparl:Paper```
 |legislativeTermList             |list object |list of all legislative terms, see object [oparl:LegislativeTerm](#oparlLegislativeTerm)
 |systemObject       *(optional)* |item object |the parent OParl system, see object [oparl:System](#oparlSystem)
@@ -109,6 +109,27 @@ The ```oparl:LegislativeTerm``` object represent one legislative period.
 |startDate          *(optional)* |Date        |first day of the legislative period
 |endDate            *(optional)* |Date        |last day of the legislative period
 
+#### <a name="oparlMeeting"></a>oparl:Meeting
+
+The ```oparl:Meeting``` object represent one meeting / assembly.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:Meeting'
+|name               *(optional)* |string      |user friendly title of the meeting
+|meetingState       *(optional)* |string      |current state of the meeting
+|cancelled          *(optional)* |boolean     |```true``` if the meeting was cancelled
+|start              *(optional)* |string      |date and time of the start time
+|end                *(optional)* |string      |date and time of the end point
+|locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
+|organizationList   *(optional)* |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
+|participantList    *(optional)* |list object |list of all present persons, see object ```oparl:Person```
+|invitationObject   *(optional)* |item object |the invitation, see object ```oparl:File```
+|resultsProtocolObject *(optional)* |item object |the protocol, see object ```oparl:File```
+|verbatimProtocolObject *(optional)* |item object |the verbatim protocol, see object ```oparl:File```
+|auxiliaryFileList  *(optional)* |list object |list of auxiliary files, see object ```oparl:File```
+|agendaItemList     *(optional)* |list object |list of agenda items, see object ```oparl:AgendaItem```
+
 #### <a name="oparlOrganization"></a>oparl:Organization
 
 The ```oparl:Organization``` object represent one organization unit.
@@ -119,7 +140,7 @@ The ```oparl:Organization``` object represent one organization unit.
 |bodyObject         *(optional)* |item object |the body of the organization, see object [oparl:Body](#oparlBody)
 |name               *(optional)* |string      |the official (and long) name of the organization
 |membershipList     *(optional)* |list object |list of all memberships, see object ```oparl:Membership```
-|meetingList        *(optional)* |list object |list of all meetings, see object ```oparl:Meeting```
+|meetingList        *(optional)* |list object |list of all meetings, see object [oparl:Meeting](#oparlMeeting)
 |shortName          *(optional)* |string      |a shorter version of the organization name
 |post               *(optional)* |array       |array of strings
 |subOrganizationOfObject *(optional)* |item object |a superior organization, see object [oparl:Organization](#oparlOrganization)
@@ -154,7 +175,6 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
 
     oparl:Person
     oparl:Membership
-    oparl:Meeting
     oparl:AgendaItem
     oparl:Paper
     oparl:Consultation

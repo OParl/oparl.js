@@ -3,6 +3,50 @@
 
 //-----------------------------------------------------------------------
 
+function testMeeting(data) {
+	'use strict';
+
+	console.log();
+	console.log('Meeting name: ' + data.name);
+	console.log('Date: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(0, 10)));
+	console.log('Start time: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(11, 16)));
+	console.log('End time: ' + (isNaN(data.end) ? '---' : data.end.toJSON().slice(11, 16)));
+
+	data.organizationList.get(function (err, dataOrganizationList) {
+		if (err !== null) {
+			console.error('Something went wrong: ' + err);
+		} else {
+			console.log('Organization count: ' + dataOrganizationList.length);
+
+			data.participantList.get(function (err, dataParticipantList) {
+				if (err !== null) {
+					console.error('Something went wrong: ' + err);
+				} else {
+					console.log('Participant count: ' + dataParticipantList.length);
+
+					data.auxiliaryFileList.get(function (err, dataAuxiliaryFileList) {
+						if (err !== null) {
+							console.error('Something went wrong: ' + err);
+						} else {
+							console.log('Auxiliary file count: ' + dataAuxiliaryFileList.length);
+
+							data.agendaItemList.get(function (err, dataAgendaItemList) {
+								if (err !== null) {
+									console.error('Something went wrong: ' + err);
+								} else {
+									console.log('Agenda item count: ' + dataAgendaItemList.length);
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
 function testOrganization(data) {
 	'use strict';
 
@@ -19,11 +63,21 @@ function testOrganization(data) {
 		} else {
 			console.log('Membership count: ' + dataMembership.length);
 
-			data.meetingList.get(function (err, dataMeeting) {
+			data.meetingList.get(function (err, dataMeetingList) {
 				if (err !== null) {
 					console.error('Something went wrong: ' + err);
 				} else {
-					console.log('Meeting count: ' + dataMeeting.length);
+					console.log('Meeting count: ' + dataMeetingList.length);
+
+					if (dataMeetingList.length > 0) {
+						dataMeetingList[0].get(function (err, dataMeeting) {
+							if (err !== null) {
+								console.error('Something went wrong: ' + err);
+							} else {
+								testMeeting(dataMeeting);
+							}
+						});
+					}
 				}
 			});
 		}
