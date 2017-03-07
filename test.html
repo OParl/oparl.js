@@ -28,6 +28,106 @@ function error(text) {
 
 //-----------------------------------------------------------------------
 
+function testMembership(data) {
+	'use strict';
+
+	log();
+	log('Membership as: ' + data.role);
+	log('Voting right: ' + (data.votingRight ? 'yes' : 'no'));
+	log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
+	log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+}
+
+//-----------------------------------------------------------------------
+
+function testParticipant(data) {
+	'use strict';
+
+	log();
+	log('Participant name: ' + data.name);
+	log('Participant name: ' + data.formOfAddress + ' ' + data.affix + ' ' + data.givenName + ' ' + data.familyName);
+	log('Gender: ' + data.gender);
+	log('Phone: ' + (data.phone.length === 0 ? '---' : data.phone[0]));
+	log('Email: ' + (data.email.length === 0 ? '---' : data.email[0]));
+	log('Status: ' + (data.status.length === 0 ? '---' : data.status[0]));
+	log('Some text about the people: ' + data.life);
+	log('Source: ' + data.lifeSource);
+
+	data.membershipList.get(function (err, dataMembershipList) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log('Membership count: ' + dataMembershipList.length);
+
+			if (dataMembershipList.length > 0) {
+				dataMembershipList[0].get(function (err, dataMembership) {
+					if (err !== null) {
+						error('Something went wrong: ' + err);
+					} else {
+						testMembership(dataMembership);
+					}
+				});
+			}
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
+function testMeeting(data) {
+	'use strict';
+
+	log();
+	log('Meeting name: ' + data.name);
+	log('Date: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(0, 10)));
+	log('Start time: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(11, 16)));
+	log('End time: ' + (isNaN(data.end) ? '---' : data.end.toJSON().slice(11, 16)));
+
+	data.organizationList.get(function (err, dataOrganizationList) {
+		if (err !== null) {
+			error('Something went wrong: ' + err);
+		} else {
+			log('Organization count: ' + dataOrganizationList.length);
+
+			data.participantList.get(function (err, dataParticipantList) {
+				if (err !== null) {
+					error('Something went wrong: ' + err);
+				} else {
+					log('Participant count: ' + dataParticipantList.length);
+
+					data.auxiliaryFileList.get(function (err, dataAuxiliaryFileList) {
+						if (err !== null) {
+							error('Something went wrong: ' + err);
+						} else {
+							log('Auxiliary file count: ' + dataAuxiliaryFileList.length);
+
+							data.agendaItemList.get(function (err, dataAgendaItemList) {
+								if (err !== null) {
+									error('Something went wrong: ' + err);
+								} else {
+									log('Agenda item count: ' + dataAgendaItemList.length);
+
+									if (dataParticipantList.length > 0) {
+										dataParticipantList[0].get(function (err, dataParticipant) {
+											if (err !== null) {
+												error('Something went wrong: ' + err);
+											} else {
+												testParticipant(dataParticipant);
+											}
+										});
+									}
+								}
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
 function testOrganization(data) {
 	'use strict';
 
@@ -44,11 +144,21 @@ function testOrganization(data) {
 		} else {
 			log('Membership count: ' + dataMembership.length);
 
-			data.meetingList.get(function (err, dataMeeting) {
+			data.meetingList.get(function (err, dataMeetingList) {
 				if (err !== null) {
 					error('Something went wrong: ' + err);
 				} else {
-					log('Meeting count: ' + dataMeeting.length);
+					log('Meeting count: ' + dataMeetingList.length);
+
+					if (dataMeetingList.length > 0) {
+						dataMeetingList[0].get(function (err, dataMeeting) {
+							if (err !== null) {
+								error('Something went wrong: ' + err);
+							} else {
+								testMeeting(dataMeeting);
+							}
+						});
+					}
 				}
 			});
 		}

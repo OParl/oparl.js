@@ -3,6 +3,52 @@
 
 //-----------------------------------------------------------------------
 
+function testMembership(data) {
+	'use strict';
+
+	console.log();
+	console.log('Membership as: ' + data.role);
+	console.log('Voting right: ' + (data.votingRight ? 'yes' : 'no'));
+	console.log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
+	console.log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+}
+
+//-----------------------------------------------------------------------
+
+function testParticipant(data) {
+	'use strict';
+
+	console.log();
+	console.log('Participant name: ' + data.name);
+	console.log('Participant name: ' + data.formOfAddress + ' ' + data.affix + ' ' + data.givenName + ' ' + data.familyName);
+	console.log('Gender: ' + data.gender);
+	console.log('Phone: ' + (data.phone.length === 0 ? '---' : data.phone[0]));
+	console.log('Email: ' + (data.email.length === 0 ? '---' : data.email[0]));
+	console.log('Status: ' + (data.status.length === 0 ? '---' : data.status[0]));
+	console.log('Some text about the people: ' + data.life);
+	console.log('Source: ' + data.lifeSource);
+
+	data.membershipList.get(function (err, dataMembershipList) {
+		if (err !== null) {
+			console.error('Something went wrong: ' + err);
+		} else {
+			console.log('Membership count: ' + dataMembershipList.length);
+
+			if (dataMembershipList.length > 0) {
+				dataMembershipList[0].get(function (err, dataMembership) {
+					if (err !== null) {
+						console.error('Something went wrong: ' + err);
+					} else {
+						testMembership(dataMembership);
+					}
+				});
+			}
+		}
+	});
+}
+
+//-----------------------------------------------------------------------
+
 function testMeeting(data) {
 	'use strict';
 
@@ -35,6 +81,16 @@ function testMeeting(data) {
 									console.error('Something went wrong: ' + err);
 								} else {
 									console.log('Agenda item count: ' + dataAgendaItemList.length);
+
+									if (dataParticipantList.length > 0) {
+										dataParticipantList[0].get(function (err, dataParticipant) {
+											if (err !== null) {
+												console.error('Something went wrong: ' + err);
+											} else {
+												testParticipant(dataParticipant);
+											}
+										});
+									}
 								}
 							});
 						}

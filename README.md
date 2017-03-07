@@ -53,14 +53,30 @@ OParl.open(uriToOParlServer, function (err, serverObj) {
 ## Object types
 
 The ```OParl.open``` function serves an [oparl:System](#oparlSystem) object to the callback function. First you should read the description of these type.
+Or just choose an object from the list:
 
-#### Item object
+- [Item object](#itemObject)
+- [List object](#listObject)
+- ```oparl:AgendaItem```
+- [oparl:Body](#oparlBody)
+- ```oparl:Consultation```
+- ```oparl:File```
+- [oparl:LegislativeTerm](#oparlLegislativeTerm)
+- ```oparl:Location```
+- [oparl:Meeting](#oparlMeeting)
+- [oparl:Membership](#oparlMembership)
+- [oparl:Organization](#oparlOrganization)
+- ```oparl:Paper```
+- [oparl:Person](#oparlPerson)
+- [oparl:System](#oparlSystem)
+
+#### <a name="itemObject"></a>Item object
 
 |Function      |Description
 |--------------|------------
 |get(callback) |The ```get``` function collect one object. This could be done by an internet request call. So the function did not return the object, it calls the ```callback``` function when it's done.<br>**```callback(error, object)```**<br>The ```error``` parameter contains an error message or, if it is ```null```, the ```object``` parameter contains an **object** in one of the oparl: types (listed below).
 
-#### List object
+#### <a name="listObject"></a>List object
 
 |Function      |Description
 |--------------|------------
@@ -77,7 +93,7 @@ The ```oparl:Body``` object represent one city, country or municipal.
 |objectType                      |string      |is 'oparl:Body'
 |name                            |string      |the official (and long) name of the body
 |organizationList                |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
-|personList                      |list object |list of all persons, see object ```oparl:Person```
+|personList                      |list object |list of all persons, see object [oparl:Person](#oparlPerson)
 |meetingList                     |list object |list of all meetings, see object [oparl:Meeting](#oparlMeeting)
 |paperList                       |list object |list of all papers, see object ```oparl:Paper```
 |legislativeTermList             |list object |list of all legislative terms, see object [oparl:LegislativeTerm](#oparlLegislativeTerm)
@@ -123,12 +139,27 @@ The ```oparl:Meeting``` object represent one meeting / assembly.
 |end                *(optional)* |string      |date and time of the end point
 |locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
 |organizationList   *(optional)* |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
-|participantList    *(optional)* |list object |list of all present persons, see object ```oparl:Person```
+|participantList    *(optional)* |list object |list of all present persons, see object [oparl:Person](#oparlPerson)
 |invitationObject   *(optional)* |item object |the invitation, see object ```oparl:File```
 |resultsProtocolObject *(optional)* |item object |the protocol, see object ```oparl:File```
 |verbatimProtocolObject *(optional)* |item object |the verbatim protocol, see object ```oparl:File```
 |auxiliaryFileList  *(optional)* |list object |list of auxiliary files, see object ```oparl:File```
 |agendaItemList     *(optional)* |list object |list of agenda items, see object ```oparl:AgendaItem```
+
+#### <a name="oparlMembership"></a>oparl:Membership
+
+The ```oparl:Membership``` object binds a person to a organization.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:Membership'
+|personObject       *(optional)* |item object |the persons, see object [oparl:Person](#oparlPerson)
+|organizationObject *(optional)* |item object |the organizations, see object [oparl:Organization](#oparlOrganization)
+|role               *(optional)* |string      |the role of the person in the organization
+|votingRight        *(optional)* |boolean     |```true``` if the person has the right to vote
+|startDate          *(optional)* |Date        |first day of the membership
+|endDate            *(optional)* |Date        |last day of the membership
+|onBehalfOfObject   *(optional)* |item object |the parent organizations, see object [oparl:Organization](#oparlOrganization)
 
 #### <a name="oparlOrganization"></a>oparl:Organization
 
@@ -139,7 +170,7 @@ The ```oparl:Organization``` object represent one organization unit.
 |objectType                      |string      |is 'oparl:Organization'
 |bodyObject         *(optional)* |item object |the body of the organization, see object [oparl:Body](#oparlBody)
 |name               *(optional)* |string      |the official (and long) name of the organization
-|membershipList     *(optional)* |list object |list of all memberships, see object ```oparl:Membership```
+|membershipList     *(optional)* |list object |list of all memberships, see object [oparl:Membership](#oparlMembership)
 |meetingList        *(optional)* |list object |list of all meetings, see object [oparl:Meeting](#oparlMeeting)
 |shortName          *(optional)* |string      |a shorter version of the organization name
 |post               *(optional)* |array       |array of strings
@@ -151,6 +182,29 @@ The ```oparl:Organization``` object represent one organization unit.
 |website            *(optional)* |string      |URI of the organization website
 |locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
 |externalBodyObject *(optional)* |item object |the body of an external OParl system, see object [oparl:Body](#oparlBody)
+
+#### <a name="oparlPerson"></a>oparl:Person
+
+The ```oparl:Person``` object represent one individual person.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:Person'
+|bodyObject         *(optional)* |item object |the body of the person, see object [oparl:Body](#oparlBody)
+|name               *(optional)* |string      |the full name of the person
+|familyName         *(optional)* |string      |the family name
+|givenName          *(optional)* |string      |the given name
+|formOfAddress      *(optional)* |string      |the form of address
+|affix              *(optional)* |string      |the name affix
+|title              *(optional)* |array       |an array of title strings
+|gender             *(optional)* |string      |the gender
+|phone              *(optional)* |array       |an array of phone numbers (strings)
+|email              *(optional)* |array       |an array of email addresses (strings)
+|locationObject     *(optional)* |item object |the persons contact address, see object ```oparl:Location```
+|status             *(optional)* |array       |an array of roles (strings)
+|membershipList     *(optional)* |list object |list of all memberships (present and past), see object [oparl:Membership](#oparlMembership)
+|life               *(optional)* |string      |a short description of the person
+|lifeSource         *(optional)* |string      |the source of the short description
 
 #### <a name="oparlSystem"></a>oparl:System
 
@@ -170,21 +224,6 @@ The ```oparl:System``` object is the entry point for all clients. It defines bas
 |website            *(optional)* |string      |URI of the RIS website
 |vendor             *(optional)* |string      |URI of the vendor of the RIS software
 |product            *(optional)* |string      |URI of the software product
-
-#### Not yet ready object types
-
-    oparl:Person
-    oparl:Membership
-    oparl:AgendaItem
-    oparl:Paper
-    oparl:Consultation
-    oparl:File
-    oparl:Location
-    oparl:Membership
-    oparl:AgendaItem
-    oparl:Consultation
-    oparl:File
-    oparl:Location
 
 ## Contributing
 
