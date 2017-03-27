@@ -173,7 +173,7 @@ function testBody(data) {
 	console.log();
 	console.log('Body name: ' + data.name);
 	console.log('Body license: ' + data.license);
-	console.log('Body modified: ' + data.modified.toJSON().substr(0, 10));
+	console.log('Body modified: ' + isNaN(data.modified) ? '' : data.modified.toJSON().substr(0, 10));
 
 	data.systemObject.get(function (err, dataSystem) {
 		if (err !== null) {
@@ -228,6 +228,16 @@ function testBody(data) {
 																});
 															}
 														});
+													} else {
+														if (dataOrganizationList.length > 0) {
+															dataOrganizationList[0].get(function (err, dataOrganization) {
+																if (err !== null) {
+																	console.error('Something went wrong: ' + err);
+																} else {
+																	testOrganization(dataOrganization);
+																}
+															});
+														}
 													}
 												}
 											});

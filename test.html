@@ -196,7 +196,7 @@ function testBody(data) {
 	log();
 	log('Body name: ' + data.name);
 	log('Body license: ' + data.license);
-	log('Body modified: ' + data.modified.toJSON().substr(0, 10));
+	log('Body modified: ' + isNaN(data.modified) ? '' : data.modified.toJSON().substr(0, 10));
 
 	data.systemObject.get(function (err, dataSystem) {
 		if (err !== null) {
@@ -251,6 +251,16 @@ function testBody(data) {
 																});
 															}
 														});
+													} else {
+														if (dataOrganizationList.length > 0) {
+															dataOrganizationList[0].get(function (err, dataOrganization) {
+																if (err !== null) {
+																	error('Something went wrong: ' + err);
+																} else {
+																	testOrganization(dataOrganization);
+																}
+															});
+														}
 													}
 												}
 											});
