@@ -28,7 +28,20 @@ function error(text) {
 
 //-----------------------------------------------------------------------
 
-function testMembership(data) {
+function testLocation(data) {
+	'use strict';
+
+	log();
+	log('Location: ' + data.description);
+	log('Address: ' + data.streetAddress);
+	log('Room: ' + data.room);
+	log('Locality: ' + data.locality + ' - ' + data.subLocality);
+	log('ZIP: ' + data.postalCode);
+}
+
+//-----------------------------------------------------------------------
+
+function testMembership(data, callback) {
 	'use strict';
 
 	log();
@@ -36,6 +49,8 @@ function testMembership(data) {
 	log('Voting right: ' + (data.votingRight ? 'yes' : 'no'));
 	log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
 	log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+
+	callback();
 }
 
 //-----------------------------------------------------------------------
@@ -64,7 +79,15 @@ function testParticipant(data) {
 					if (err !== null) {
 						error('Something went wrong: ' + err);
 					} else {
-						testMembership(dataMembership);
+						testMembership(dataMembership, function () {
+							data.locationObject.get(function (err, dataLocation) {
+								if (err !== null) {
+									error('Something went wrong: ' + err);
+								} else {
+									testLocation(dataLocation);
+								}
+							});
+						});
 					}
 				});
 			}

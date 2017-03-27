@@ -62,7 +62,7 @@ Or just choose an object from the list:
 - ```oparl:Consultation```
 - ```oparl:File```
 - [oparl:LegislativeTerm](#oparlLegislativeTerm)
-- ```oparl:Location```
+- [oparl:Location](#oparlLocation)
 - [oparl:Meeting](#oparlMeeting)
 - [oparl:Membership](#oparlMembership)
 - [oparl:Organization](#oparlOrganization)
@@ -125,6 +125,25 @@ The ```oparl:LegislativeTerm``` object represent one legislative period.
 |startDate          *(optional)* |Date        |first day of the legislative period
 |endDate            *(optional)* |Date        |last day of the legislative period
 
+#### <a name="oparlLocation"></a>oparl:Location
+
+The ```oparl:Location``` object represent one physical location.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:Location'
+|description        *(optional)* |string      |user friendly description of the postal address
+|geojsonObject      *(optional)* |item object |a ```Feature``` object of the ```GeoJSON``` specification
+|streetAddress      *(optional)* |string      |street and house number of the address
+|room               *(optional)* |string      |room of the address
+|postalCode         *(optional)* |string      |ZIP of the address
+|subLocality        *(optional)* |string      |sublevel location (district, ...)
+|locality           *(optional)* |string      |location of the address
+|bodiesList         *(optional)* |list object |list of all bodies, see object [oparl:Body](#oparlBody)
+|organizationList   *(optional)* |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
+|meetingList        *(optional)* |list object |list of all meetings, see object [oparl:Meeting](#oparlMeeting)
+|papersList         *(optional)* |list object |list of all papers, see object [oparl:Paper](#oparlPaper)
+
 #### <a name="oparlMeeting"></a>oparl:Meeting
 
 The ```oparl:Meeting``` object represent one meeting / assembly.
@@ -137,7 +156,7 @@ The ```oparl:Meeting``` object represent one meeting / assembly.
 |cancelled          *(optional)* |boolean     |```true``` if the meeting was cancelled
 |start              *(optional)* |string      |date and time of the start time
 |end                *(optional)* |string      |date and time of the end point
-|locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
+|locationObject     *(optional)* |item object |location of the organization, see object [oparl:Location](#oparlLocation)
 |organizationList   *(optional)* |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
 |participantList    *(optional)* |list object |list of all present persons, see object [oparl:Person](#oparlPerson)
 |invitationObject   *(optional)* |item object |the invitation, see object ```oparl:File```
@@ -180,7 +199,7 @@ The ```oparl:Organization``` object represent one organization unit.
 |startDate          *(optional)* |Date        |date of formation
 |endDate            *(optional)* |Date        |date of termination
 |website            *(optional)* |string      |URI of the organization website
-|locationObject     *(optional)* |item object |location of the organization, see object ```oparl:Location```
+|locationObject     *(optional)* |item object |location of the organization, see object [oparl:Location](#oparlLocation)
 |externalBodyObject *(optional)* |item object |the body of an external OParl system, see object [oparl:Body](#oparlBody)
 
 #### <a name="oparlPerson"></a>oparl:Person
@@ -200,7 +219,7 @@ The ```oparl:Person``` object represent one individual person.
 |gender             *(optional)* |string      |the gender
 |phone              *(optional)* |array       |an array of phone numbers (strings)
 |email              *(optional)* |array       |an array of email addresses (strings)
-|locationObject     *(optional)* |item object |the persons contact address, see object ```oparl:Location```
+|locationObject     *(optional)* |item object |the persons contact address, see object [oparl:Location](#oparlLocation)
 |status             *(optional)* |array       |an array of roles (strings)
 |membershipList     *(optional)* |list object |list of all memberships (present and past), see object [oparl:Membership](#oparlMembership)
 |life               *(optional)* |string      |a short description of the person

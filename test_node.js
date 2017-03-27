@@ -3,7 +3,20 @@
 
 //-----------------------------------------------------------------------
 
-function testMembership(data) {
+function testLocation(data) {
+	'use strict';
+
+	console.log();
+	console.log('Location: ' + data.description);
+	console.log('Address: ' + data.streetAddress);
+	console.log('Room: ' + data.room);
+	console.log('Locality: ' + data.locality + ' - ' + data.subLocality);
+	console.log('ZIP: ' + data.postalCode);
+}
+
+//-----------------------------------------------------------------------
+
+function testMembership(data, callback) {
 	'use strict';
 
 	console.log();
@@ -11,6 +24,8 @@ function testMembership(data) {
 	console.log('Voting right: ' + (data.votingRight ? 'yes' : 'no'));
 	console.log('Start date: ' + (isNaN(data.startDate) ? '---' : data.startDate.toJSON().slice(0, 10)));
 	console.log('End date: ' + (isNaN(data.endDate) ? '---' : data.endDate.toJSON().slice(0, 10)));
+
+	callback();
 }
 
 //-----------------------------------------------------------------------
@@ -39,7 +54,15 @@ function testParticipant(data) {
 					if (err !== null) {
 						console.error('Something went wrong: ' + err);
 					} else {
-						testMembership(dataMembership);
+						testMembership(dataMembership, function () {
+							data.locationObject.get(function (err, dataLocation) {
+								if (err !== null) {
+									console.error('Something went wrong: ' + err);
+								} else {
+									testLocation(dataLocation);
+								}
+							});
+						});
 					}
 				});
 			}
