@@ -3,7 +3,7 @@
 
 //-----------------------------------------------------------------------
 
-function testLocation(data) {
+function testLocation(data, callback) {
 	'use strict';
 
 	console.log();
@@ -12,6 +12,8 @@ function testLocation(data) {
 	console.log('Room: ' + data.room);
 	console.log('Locality: ' + data.locality + ' - ' + data.subLocality);
 	console.log('ZIP: ' + data.postalCode);
+
+	callback();
 }
 
 //-----------------------------------------------------------------------
@@ -30,7 +32,7 @@ function testMembership(data, callback) {
 
 //-----------------------------------------------------------------------
 
-function testParticipant(data) {
+function testParticipant(data, callback) {
 	'use strict';
 
 	console.log();
@@ -59,7 +61,7 @@ function testParticipant(data) {
 								if (err !== null) {
 									console.error('Something went wrong: ' + err);
 								} else {
-									testLocation(dataLocation);
+									testLocation(dataLocation, callback);
 								}
 							});
 						});
@@ -110,7 +112,17 @@ function testMeeting(data) {
 											if (err !== null) {
 												console.error('Something went wrong: ' + err);
 											} else {
-												testParticipant(dataParticipant);
+												testParticipant(dataParticipant, function () {
+													if (dataAgendaItemList.length > 0) {
+														dataAgendaItemList[0].get(function (err, dataAgendaItem) {
+															if (err !== null) {
+																console.error('Something went wrong: ' + err);
+															} else {
+																testAgendaItem(dataAgendaItem);
+															}
+														});
+													}
+												});
 											}
 										});
 									}
@@ -252,8 +264,9 @@ function testBody(data) {
 															}
 														});
 													} else {
-														if (dataOrganizationList.length > 0) {
-															dataOrganizationList[0].get(function (err, dataOrganization) {
+														var orga = 6;
+														if (dataOrganizationList.length > orga) {
+															dataOrganizationList[orga].get(function (err, dataOrganization) {
 																if (err !== null) {
 																	console.error('Something went wrong: ' + err);
 																} else {
