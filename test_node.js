@@ -3,6 +3,19 @@
 
 //-----------------------------------------------------------------------
 
+function testAgendaItem(data) {
+	'use strict';
+
+	console.log();
+	console.log('Agenda: ' + data.number + '. ' + data.name);
+	console.log('Result: ' + data.result);
+	console.log('Text: ' + data.resolutionText);
+	console.log('Start time: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(11, 16)));
+	console.log('End time: ' + (isNaN(data.end) ? '---' : data.end.toJSON().slice(11, 16)));
+}
+
+//-----------------------------------------------------------------------
+
 function testLocation(data, callback) {
 	'use strict';
 

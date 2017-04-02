@@ -28,6 +28,19 @@ function error(text) {
 
 //-----------------------------------------------------------------------
 
+function testAgendaItem(data) {
+	'use strict';
+
+	log();
+	log('Agenda: ' + data.number + '. ' + data.name);
+	log('Result: ' + data.result);
+	log('Text: ' + data.resolutionText);
+	log('Start time: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(11, 16)));
+	log('End time: ' + (isNaN(data.end) ? '---' : data.end.toJSON().slice(11, 16)));
+}
+
+//-----------------------------------------------------------------------
+
 function testLocation(data, callback) {
 	'use strict';
 
