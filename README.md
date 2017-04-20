@@ -66,7 +66,7 @@ Or just choose an object from the list:
 
 - [Item object](#itemObject)
 - [List object](#listObject)
-- ```oparl:AgendaItem```
+- [oparl:AgendaItem](#oparlAgendaItem)
 - [oparl:Body](#oparlBody)
 - ```oparl:Consultation```
 - ```oparl:File```
@@ -92,6 +92,27 @@ Or just choose an object from the list:
 |get(callback) |The ```get``` function collect a list of items. This could be done by an internet request call. So the function did not return a list, it calls the ```callback``` function when it's done.<br>**```callback(error, itemList)```**<br>The ```error``` parameter contains an error message or, if it is ```null```, the ```itemList``` parameter contains an array of **item objects**.
 
 **To do:** the list object should handle the paging and pagination. Currently a maximum of 100 objects will be listed.
+
+#### <a name="oparlAgendaItem"></a>oparl:AgendaItem
+
+The ```oparl:AgendaItem``` object represent one item of an agenda.
+
+|Parameter                       |Type        |Description
+|--------------------------------|------------|-----------------------------------------------
+|objectType                      |string      |is 'oparl:AgendaItem'
+|meeting            *(optional)* |string      |location of the referencing meeting
+|                                |            |*^^ type should be changed ^^*
+|number             *(optional)* |string      |structuring sign of the agenda item
+|name               *(optional)* |string      |name of the agenda item
+|public             *(optional)* |boolean     |```true``` if the agenda item is in open court
+|consultation       *(optional)* |string      |location of the attached consultation
+|                                |            |*^^ type should be changed ^^*
+|result             *(optional)* |string      |a description of the result
+|resolutionText     *(optional)* |string      |a resolution text (if any)
+|resolutionFileObject *(optional)* |item object|the file of the resolution
+|auxiliaryFileList  *(optional)* |list object |other files of the agende item
+|start              *(optional)* |Date        |date and time of the start time
+|end                *(optional)* |Date        |date and time of the end point
 
 #### <a name="oparlBody"></a>oparl:Body
 
@@ -164,7 +185,9 @@ The ```oparl:Meeting``` object represent one meeting / assembly.
 |meetingState       *(optional)* |string      |current state of the meeting
 |cancelled          *(optional)* |boolean     |```true``` if the meeting was cancelled
 |start              *(optional)* |string      |date and time of the start time
+|                                |            |*^^ type should be changed ^^*
 |end                *(optional)* |string      |date and time of the end point
+|                                |            |*^^ type should be changed ^^*
 |locationObject     *(optional)* |item object |location of the organization, see object [oparl:Location](#oparlLocation)
 |organizationList   *(optional)* |list object |list of all organizations, see object [oparl:Organization](#oparlOrganization)
 |participantList    *(optional)* |list object |list of all present persons, see object [oparl:Person](#oparlPerson)
@@ -172,7 +195,7 @@ The ```oparl:Meeting``` object represent one meeting / assembly.
 |resultsProtocolObject *(optional)* |item object |the protocol, see object ```oparl:File```
 |verbatimProtocolObject *(optional)* |item object |the verbatim protocol, see object ```oparl:File```
 |auxiliaryFileList  *(optional)* |list object |list of auxiliary files, see object ```oparl:File```
-|agendaItemList     *(optional)* |list object |list of agenda items, see object ```oparl:AgendaItem```
+|agendaItemList     *(optional)* |list object |list of agenda items, see object [oparl:AgendaItem](#oparlAgendaItem)
 
 #### <a name="oparlMembership"></a>oparl:Membership
 
