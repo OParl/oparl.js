@@ -2,7 +2,16 @@
 
 This is a JavaScript library for the OParl protocoll.
 
+### Work in progress
+
 THE LIB IS IN THE BEGINING. PRE-ALPHA...
+
+Currently working on (roadmap)
+- create parser of missing object types
+- review the object type implementations with the latest spec version
+- implement the pagination of big tables
+- introduce a 'strict mode' to warn if the OParl endpoint violate the spec
+- add a mode to identify additional vendor parameter
 
 Some links: the [OParl spec](https://oparl.org/spezifikation/online-ansicht/),
 a (real) [test system](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp),
