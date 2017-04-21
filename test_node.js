@@ -3,6 +3,15 @@
 
 //-----------------------------------------------------------------------
 
+function testConsultation(data) {
+	'use strict';
+
+	console.log();
+	console.log('Consultation: ' + data.role);
+}
+
+//-----------------------------------------------------------------------
+
 function testAgendaItem(data) {
 	'use strict';
 
@@ -12,6 +21,14 @@ function testAgendaItem(data) {
 	console.log('Text: ' + data.resolutionText);
 	console.log('Start time: ' + (isNaN(data.start) ? '---' : data.start.toJSON().slice(11, 16)));
 	console.log('End time: ' + (isNaN(data.end) ? '---' : data.end.toJSON().slice(11, 16)));
+
+	data.consultationObject.get(function (err, dataConsultation) {
+		if (err !== null) {
+			console.error('Something went wrong: ' + err);
+		} else {
+			testConsultation(dataConsultation);
+		}
+	});
 }
 
 //-----------------------------------------------------------------------
@@ -258,7 +275,7 @@ function testBody(data) {
 													console.error('Something went wrong: ' + err);
 												} else {
 													console.log('Legislative count: ' + dataLegislativeTermList.length);
-													if (dataLegislativeTermList.length > 0) {
+/*													if (dataLegislativeTermList.length > 0) {
 														dataLegislativeTermList[0].get(function (err, dataLegislativeTerm) {
 															if (err !== null) {
 																console.error('Something went wrong: ' + err);
@@ -287,6 +304,16 @@ function testBody(data) {
 																}
 															});
 														}
+													}*/
+
+													if (dataMeetingList.length > 0) {
+														dataMeetingList[0].get(function (err, dataMeeting) {
+															if (err !== null) {
+																console.error('Something went wrong: ' + err);
+															} else {
+																testMeeting(dataMeeting);
+															}
+														});
 													}
 												}
 											});
@@ -335,8 +362,10 @@ function start() {
 	'use strict';
 
 	var OParl = require('./lib/oparl-src');
-	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
-//	OParl.open('https://dev.oparl.org/api/v1/system/', function (err, data) {
+//	OParl.open('https://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp', function (err, data) {
+//	OParl.open('https://api.kleineanfragen.de/oparl/v1', function (err, data) {
+//	OParl.open('https://www.muenchen-transparent.de/oparl/v1.0', function (err, data) {
+	OParl.open('https://dev.oparl.org/api/v1/system/', function (err, data) {
 		if (err !== null) {
 			console.error('Something went wrong: ' + err);
 		} else {

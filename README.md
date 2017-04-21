@@ -14,7 +14,7 @@ Currently working on (roadmap)
 - add a mode to identify additional vendor parameter
 
 Some links: the [OParl spec](https://oparl.org/spezifikation/online-ansicht/),
-a (real) [test system](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp),
+test systems([Landkreis LUP](http://www.lwl-pch.sitzung-online.de/oi/oparl/1.0/system.asp), [kleineAnfragen](https://api.kleineanfragen.de/oparl/v1), [München Transparent](https://www.muenchen-transparent.de/oparl/v1.0)),
 and a [live demo](https://oparl.github.io/oparl.js/test.html) of the oparl.js
 
 ## Getting started
@@ -104,13 +104,12 @@ The ```oparl:AgendaItem``` object represent one item of an agenda.
 |                                |            |*^^ type should be changed ^^*
 |number             *(optional)* |string      |structuring sign of the agenda item
 |name               *(optional)* |string      |name of the agenda item
-|public             *(optional)* |boolean     |```true``` if the agenda item is in open court
-|consultation       *(optional)* |string      |location of the attached consultation
-|                                |            |*^^ type should be changed ^^*
+|publicly           *(optional)* |boolean     |```true``` if the agenda item is in open court
+|consultationObject *(optional)* |item object |location of the attached consultation, see object [oparl:Consultation](#oparlConsultation)
 |result             *(optional)* |string      |a description of the result
 |resolutionText     *(optional)* |string      |a resolution text (if any)
-|resolutionFileObject *(optional)* |item object|the file of the resolution
-|auxiliaryFileList  *(optional)* |list object |other files of the agende item
+|resolutionFileObject *(optional)* |item object|the file of the resolution, see object [oparl:File](#oparlFile)
+|auxiliaryFileList  *(optional)* |list object |other files of the agende item, see object [oparl:File](#oparlFile)
 |start              *(optional)* |Date        |date and time of the start time
 |end                *(optional)* |Date        |date and time of the end point
 
